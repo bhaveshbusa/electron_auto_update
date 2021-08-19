@@ -39,7 +39,7 @@ app.on('activate', function () {
 
 ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
-  mainWindow.webContents.send('update_available');
+  mainWindow.webContents.send('work_around_download');
   autoUpdater.checkForUpdatesAndNotify();
 });
 
@@ -49,8 +49,9 @@ autoUpdater.on('update-available', () => {
 
 autoUpdater.on('update-downloaded', () => {
   mainWindow.webContents.send('update_downloaded');
+  autoUpdater.quitAndInstall();
 });
 
 ipcMain.on('restart_app', () => {
-  autoUpdater.quitAndInstall();
+  //autoUpdater.quitAndInstall();
 });
