@@ -16,6 +16,7 @@ function createWindow () {
     mainWindow = null;
   });
   mainWindow.once('ready-to-show', () => {
+    mainWindow.webContents.send('update_available');
     autoUpdater.checkForUpdatesAndNotify();
   });
 }
